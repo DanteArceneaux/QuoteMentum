@@ -34,6 +34,11 @@ public class QuotesService {
         quotesRepository.deleteById(id);
     }
 
+    public List<Quotes> searchQuotes(String author, String quote) {
+        return quotesRepository.search(author, quote);
+    }
+
+
     public Quotes updateQuote(Long id, Quotes updatedQuote) {
         return quotesRepository.findById(id).map(quote -> {
             quote.setQuote(updatedQuote.getQuote());

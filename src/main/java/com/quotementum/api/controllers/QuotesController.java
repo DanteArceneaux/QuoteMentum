@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/quotes")
 public class QuotesController {
@@ -23,6 +23,12 @@ public class QuotesController {
     public List<Quotes> getAllQuotes() {
         return quotesService.findAllQuotes();
     }
+
+    @GetMapping("/search")
+    public List<Quotes> search(@RequestParam(required = false) String author, @RequestParam(required = false) String quote) {
+        return quotesService.searchQuotes(author, quote);
+    }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Quotes> getQuoteById(@PathVariable Long id) {
